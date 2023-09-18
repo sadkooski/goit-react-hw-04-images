@@ -84,8 +84,6 @@ const App = () => {
           radius="9"
           color="green"
           ariaLabel="loading"
-          wrapperStyle
-          wrapperClass
         />
       )}
     </div>

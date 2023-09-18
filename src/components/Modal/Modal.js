@@ -3,8 +3,8 @@ import * as basicLightbox from 'basiclightbox';
 export const Modal = ({ image }) => {
   const openModal = () => {
     const content = `
-      <div class="Overlay">
-        <div class="Modal">
+      <div className="Overlay">
+        <div className="Modal">
           <img src="${image}" alt="" />
         </div>
       </div>
