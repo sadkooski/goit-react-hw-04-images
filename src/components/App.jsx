@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import { Button } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
-import { Audio } from 'react-loader-spinner';
 import './styles.css';
 
 const App = () => {
   const [images, setImages] = useState([]);
   const [inputSearch, setInputSearch] = useState('');
   const [limit, setLimit] = useState(12);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [apiKey] = useState('36974281-9a9267ae338de1504a0765e3e');
   const [clickedImage, setClickedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,18 +43,18 @@ const App = () => {
     setPage(1);
   };
 
-  const loadMoreHandler = () => {
-    setLimit(limit + 12);
-    setPage(page + 1);
-  };
-
-  const modalHandler = image => {
-    setClickedImage(image);
-  };
-
   const closeModal = () => {
     setClickedImage(null);
   };
+
+  // const loadMoreHandler = () => {
+  //   setLimit(limit + 12);
+  //   setPage(page + 1);
+  // };
+
+  // const modalHandler = image => {
+  //   setClickedImage(image);
+  // };
 
   return (
     <div
@@ -71,21 +69,8 @@ const App = () => {
       }}
     >
       <Searchbar onSubmit={submitHandler} />
-      {inputSearch && (
-        <ImageGallery gallery={images} onClick={modalHandler}></ImageGallery>
-      )}
-      <Button onClick={loadMoreHandler} />
+      {inputSearch && <ImageGallery isLoading={isLoading} />}
       {clickedImage && <Modal image={clickedImage} onClose={closeModal} />}
-      {isLoading && (
-        <Audio
-          className="Spinner"
-          height="80"
-          width="80"
-          radius="9"
-          color="green"
-          ariaLabel="loading"
-        />
-      )}
     </div>
   );
 };
