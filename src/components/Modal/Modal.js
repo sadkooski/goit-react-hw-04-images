@@ -1,10 +1,11 @@
 import * as basicLightbox from 'basiclightbox';
+import { useEffect } from 'react';
 
 export const Modal = ({ image }) => {
-  const openModal = () => {
+  useEffect(() => {
     const content = `
-      <div className="Overlay">
-        <div className="Modal">
+      <div class="Overlay">
+        <div class="Modal">
           <img src="${image}" alt="" />
         </div>
       </div>
@@ -36,7 +37,7 @@ export const Modal = ({ image }) => {
         return;
       }
     });
-  };
+  }, [image]);
 
-  return openModal();
+  return null;
 };

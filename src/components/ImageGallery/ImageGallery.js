@@ -2,6 +2,7 @@ import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { Button } from 'components/Button/Button';
 import React, { useState, useEffect } from 'react';
 import { Audio } from 'react-loader-spinner';
+import { fetchImages } from 'services/api';
 
 export const ImageGallery = ({ inputSearch, setClickedImage }) => {
   const [images, setImages] = useState([]);
@@ -11,25 +12,8 @@ export const ImageGallery = ({ inputSearch, setClickedImage }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        setIsLoading(true);
-
-        const response = await fetch(
-          `https://pixabay.com/api/?q=${inputSearch}&page=${page}&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=${limit}`
-        );
-        const data = await response.json();
-
-        setImages(data.hits);
-        setIsLoading(false);
-      } catch (error) {
-        console.log('errr', error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchImages();
-  }, [inputSearch, page, apiKey, limit]);
+    fetchImages(inputSearch, page, apiKey, limit, setImages, setIsLoading);
+  }, [inputSearch, page, apiKey, limit, setIsLoading, setImages]);
 
   const modalHandler = image => {
     setClickedImage(image);
