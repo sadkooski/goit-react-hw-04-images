@@ -6,21 +6,27 @@ import { fetchImages } from 'services/api';
 
 export const ImageGallery = ({ inputSearch, setClickedImage }) => {
   const [images, setImages] = useState([]);
-  const [limit, setLimit] = useState(12);
   const [page, setPage] = useState(1);
-  const [apiKey] = useState('36974281-9a9267ae338de1504a0765e3e');
   const [isLoading, setIsLoading] = useState(false);
 
+  // useEffect(() => {
+  //   fetchImages(inputSearch, page, apiKey, limit, setImages, setIsLoading);
+  // }, [inputSearch, page, apiKey, limit, setIsLoading, setImages]);
+
   useEffect(() => {
-    fetchImages(inputSearch, page, apiKey, limit, setImages, setIsLoading);
-  }, [inputSearch, page, apiKey, limit, setIsLoading, setImages]);
+    const getImages = async () => {
+      const data = await fetchImages(inputSearch, page);
+      setImages(prevState => [...prevState, ...data.hits]);
+      setIsLoading(false);
+    };
+    getImages();
+  }, [inputSearch, page]);
 
   const modalHandler = image => {
     setClickedImage(image);
   };
 
   const loadMoreHandler = () => {
-    setLimit(limit + 12);
     setPage(page + 1);
   };
 
