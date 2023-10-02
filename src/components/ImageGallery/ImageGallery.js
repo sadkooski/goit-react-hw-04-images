@@ -31,7 +31,11 @@ export const ImageGallery = ({ inputSearch, setClickedImage }) => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        overflowY: 'AuthenticatorAssertionResponse',
+      }}
+    >
       <ul className="ImageGallery">
         {images.map(image => (
           <ImageGalleryItem

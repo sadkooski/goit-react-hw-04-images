@@ -30,11 +30,15 @@ img {
  * Стили компонента App
  */
 .App {
-  display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
-  padding-bottom: 24px;
-  padding-top: 30px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 40;
+  color: #010101;
 }
 
 /*
@@ -55,6 +59,7 @@ img {
   background-color: #3f51b5;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  margin-bottom: 20px;
 }
 
 /*
@@ -121,32 +126,33 @@ img {
  * Стили компонента ImageGallery
  */
 .ImageGallery {
-  display: flex;
   display: grid;
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 16px;
-  margin: 30px;
   margin-bottom: 10px;
   padding: 0;
   list-style: none;
-  min-height: 100%;
+  height: ;
 }
 
 /*
  * Стили компонента ImageGalleryItem
  */
 .ImageGalleryItem {
-  border-radius: 2px;
+  height: 300px;
+  width: 350px;
+  border-radius: 8px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 .ImageGalleryItem-image {
   width: 100%;
-  height: 260px;
+  height: 100%;
   object-fit: cover;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
 }
 
 .ImageGalleryItem-image:hover {
