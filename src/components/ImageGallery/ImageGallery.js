@@ -16,7 +16,11 @@ export const ImageGallery = ({ inputSearch, setClickedImage }) => {
   useEffect(() => {
     const getImages = async () => {
       const data = await fetchImages(inputSearch, page);
-      setImages(prevState => [...prevState, ...data.hits]);
+      if (page > 1) {
+        setImages(prevState => [...prevState, ...data.hits]);
+      } else {
+        setImages(data.hits);
+      }
       setIsLoading(false);
     };
     getImages();
