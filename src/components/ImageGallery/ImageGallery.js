@@ -8,6 +8,7 @@ export const ImageGallery = ({ inputSearch, setClickedImage }) => {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState('');
 
   // useEffect(() => {
   //   fetchImages(inputSearch, page, apiKey, limit, setImages, setIsLoading);
@@ -15,6 +16,16 @@ export const ImageGallery = ({ inputSearch, setClickedImage }) => {
 
   useEffect(() => {
     const getImages = async () => {
+      if (inputSearch === '') {
+        return;
+      }
+
+      if (query !== inputSearch && page > 1) {
+        setImages([]);
+        setPage(1);
+        return;
+      }
+
       const data = await fetchImages(inputSearch, page);
       if (page > 1) {
         setImages(prevState => [...prevState, ...data.hits]);
@@ -22,9 +33,10 @@ export const ImageGallery = ({ inputSearch, setClickedImage }) => {
         setImages(data.hits);
       }
       setIsLoading(false);
+      setQuery(inputSearch);
     };
     getImages();
-  }, [inputSearch, page]);
+  }, [inputSearch, page, query]);
 
   const modalHandler = image => {
     setClickedImage(image);

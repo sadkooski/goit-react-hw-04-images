@@ -14,6 +14,7 @@ const App = () => {
     const form = evt.currentTarget;
     const inputValue = form.elements.search.value;
     setInputSearch(inputValue);
+    form.reset();
   };
 
   const closeModal = () => {
